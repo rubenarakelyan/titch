@@ -4,7 +4,7 @@ class Link < ApplicationRecord
 
   before_validation :set_shortcode
 
-private
+  private
 
   def set_shortcode
     return if shortcode.present?

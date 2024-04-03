@@ -15,7 +15,7 @@ class Auth0Controller < ApplicationController
     redirect_to logout_url, allow_other_host: true
   end
 
-private
+  private
 
   def logout_url
     request_params = {
