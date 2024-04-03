@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:11.3
+    volumes:
+      - mariadb-volume:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MARIADB_ROOT_PASSWORD=password
+      - MARIADB_DATABASE=titch_development
+      - MARIADB_USER=titch
+      - MARIADB_PASSWORD=password
+
+  redis:
+    image: redis
+    hostname: redis
+    ports:
+      - 6379:6379
+
+volumes:
+  mariadb-volume:
