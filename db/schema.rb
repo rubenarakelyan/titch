@@ -10,8 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_03_155350) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_03_155844) do
 # Could not dump table "links" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
+
+# Could not dump table "views" because of following StandardError
 #   Unknown type 'uuid' for column 'id'
 
 end

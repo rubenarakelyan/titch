@@ -7,6 +7,7 @@ class CreateLinks < ActiveRecord::Migration[7.1]
       t.string :description
       t.string :og_image_url
       t.boolean :enabled, null: false, default: true
+      t.string :created_by
       t.timestamps
     end
   end
