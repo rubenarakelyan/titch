@@ -28,4 +28,15 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        link:
+          attributes:
+            shortcode:
+              blank: Enter a shortcode
+            url:
+              blank: Enter a URL to redirect to
+              invalid: Enter a valid URL to redirect to
+              https_only: Enter an HTTPS URL
+              host_not_allowed: Enter an allowed URL to redirect to
