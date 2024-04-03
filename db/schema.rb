@@ -11,10 +11,24 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2024_04_03_155844) do
-# Could not dump table "links" because of following StandardError
-#   Unknown type 'uuid' for column 'id'
+  create_table "links", id: false, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "shortcode", null: false
+    t.string "url", null: false
+    t.string "title"
+    t.string "description"
+    t.string "og_image_url"
+    t.boolean "enabled", default: true, null: false
+    t.string "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shortcode"], name: "index_links_on_shortcode", unique: true
+  end
 
-# Could not dump table "views" because of following StandardError
-#   Unknown type 'uuid' for column 'id'
+  create_table "views", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "shortcode", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shortcode"], name: "index_views_on_shortcode"
+  end
 
 end
