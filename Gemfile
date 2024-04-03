@@ -50,6 +50,9 @@ gem "bootsnap", require: false
 # Use Sidekiq for background jobs
 gem "sidekiq", "~> 7.2"
 
+# Use HTTParty to make external requests from Sidekiq
+gem "httparty", "~> 0.21"
+
 # Auth0 gems
 gem "omniauth-auth0", "~> 3.0"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
