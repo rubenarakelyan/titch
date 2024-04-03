@@ -1,4 +1,6 @@
 class Link < ApplicationRecord
+  has_many :views, primary_key: :shortcode, foreign_key: :shortcode
+
   validates :shortcode, presence: true
   validates :url, presence: true, url: { allow_http: true }
 
