@@ -1,0 +1,26 @@
+<% content_for :title, full_short_url(@link) %>
+
+<section class="w-1/2">
+  <header>
+    <h2 class="mb-2 text-2xl font-bold"><%= full_short_url(@link) %></h2>
+  </header>
+  <dl class="mb-2">
+    <dt class="font-bold">Short URL</dt>
+    <dd class="pl-2"><a href="<%= full_short_url(@link) %>" target="_blank" rel="noopener noreferer"><%= full_short_url(@link) %></a></dd>
+    <dt class="font-bold">Destination</dt>
+    <dd class="pl-2"><a href="<%= @link.url %>" target="_blank" rel="noopener noreferer"><%= @link.url %></a></dd>
+    <dt class="font-bold">Title</dt>
+    <dd class="pl-2"><%= @link.title.presence || "<em>None</em>".html_safe %></dd>
+    <dt class="font-bold">Description</dt>
+    <dd class="pl-2"><%= @link.description.presence || "<em>None</em>".html_safe %></dd>
+    <dt class="font-bold">OpenGraph image URL</dt>
+    <dd class="pl-2"><%= @link.og_image_url.presence || "<em>None</em>".html_safe %></dd>
+    <dt class="font-bold">Created by</dt>
+    <dd class="pl-2"><%= @link.created_by.presence || "<em>Unknown</em>".html_safe %></dd>
+    <dt class="font-bold">Status</dt>
+    <dd class="pl-2"><% if @link.enabled? %>Enabled<% else %><strong>Disabled</strong><% end %></dd>
+  </dl>
+  <p>
+    <a href="<%= edit_link_path(@link) %>">Edit short URL</a>
+  </p>
+</section>

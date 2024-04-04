@@ -1,8 +1,40 @@
-<div>
-  <h1 class="font-bold text-4xl">Dashboard#index</h1>
-  <% if logged_in? %>
-    <%= button_to "Logout", "/auth/logout", method: :get, data: { turbo: false } %>
-  <% else %>
-    <%= button_to "Login", "/auth/auth0", method: :post, data: { turbo: false } %>
-  <% end %>
-</div>
+<% content_for :title, "Home" %>
+
+<% if logged_in? %>
+  <div class="flex justify-between">
+    <section class="w-1/2">
+      <header>
+        <h2 class="mb-2 text-2xl font-bold">Newest 10 short URLs</h2>
+      </header>
+      <% if @top_links.present? %>
+        <dl class="mb-2">
+        <% @top_links.each do |link| %>
+          <dt><a href="<%= full_short_url(link) %>" target="_blank" rel="noopener noreferer"><%= full_short_url(link) %></a> <span aria-hidden="true">&rarr;</span></dt>
+          <dd class="pl-2"><a href="<%= link.url %>" target="_blank" rel="noopener noreferer"><%= link.url %></a></dd>
+        <% end %>
+        </dl>
+      <% else %>
+        <p>There are currently no short URLs.</p>
+      <% end %>
+      <p>
+        <a href="<%= new_link_path %>">Create a short URL</a>
+      </p>
+    </section>
+    <section class="w-1/2">
+      <header>
+        <h2 class="mb-2 text-2xl font-bold">Latest 10 views</h2>
+      </header>
+      <% if @top_views.present? %>
+        <% @top_views.each do |link| %>
+        <% end %>
+      <% else %>
+        <p>There are currently no views.</p>
+      <% end %>
+    </section>
+  </div>
+<% else %>
+  <section>
+    <h2 class="mb-2 text-2xl font-bold">Welcome to Titch</h2>
+    <p>Please log in to manage short URLs.</p>
+  </section>
+<% end %>

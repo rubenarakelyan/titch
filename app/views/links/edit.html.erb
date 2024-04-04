@@ -1,0 +1,54 @@
+<% content_for :title, "Edit #{full_short_url(@link)}" %>
+
+<section>
+  <header>
+    <h2 class="text-2xl font-bold mb-4">Edit <%= full_short_url(@link) %></h2>
+  </header>
+  <%= form_with model: @link, html: { novalidate: true } do |form| %>
+    <% if @link.errors.any? %>
+      <div class="border-4 border-red-500 mb-4 p-4" role="alert">
+        <h3 class="text-xl font-bold mb-4">There is a problem</h3>
+        <ul>
+        <% @link.errors.to_hash.each_pair do |field, messages| %>
+          <% messages.each do |message| %>
+          <li>
+            <a href="#link_<%= field %>" class="text-red-500 hover:text-red-900 active:text-red-900 focus:text-red-900 font-bold"><%= message %></a>
+          </li>
+          <% end %>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <fieldset class="mb-4 p-4 border border-slate-200">
+      <legend class="p-2">Non-editable fields</legend>
+      <dl class="mb-2">
+        <dt class="font-bold">Short URL</dt>
+        <dd class="pl-2"><a href="<%= full_short_url(@link) %>" target="_blank" rel="noopener noreferer"><%= full_short_url(@link) %></a></dd>
+        <dt class="font-bold">Destination</dt>
+        <dd class="pl-2"><a href="<%= @link.url %>" target="_blank" rel="noopener noreferer"><%= @link.url %></a></dd>
+        <dt class="font-bold">Created by</dt>
+        <dd class="pl-2"><%= @link.created_by.presence || "<em>Unknown</em>".html_safe %></dd>
+      </dl>
+    </fieldset>
+    <fieldset class="mb-4 p-4 border border-slate-200">
+      <legend class="p-2">Metadata fields</legend>
+      <p class="mb-4">These fields are normally pre-filled with metadata collected from the destination URL but can be changed.</p>
+      <%= form.label :title, "Title", class: "block mb-2" %>
+      <%= form.text_field :title, class: "block mb-4 border-2 border-slate-500" %>
+      <%= form.label :description, "Description", class: "block mb-2" %>
+      <%= form.text_field :description, class: "block mb-4 border-2 border-slate-500" %>
+      <%= form.label :og_image_url, "OpenGraph image URL", class: "block mb-2" %>
+      <%= form.url_field :og_image_url, class: "block mb-4 border-2 border-slate-500" %>
+    </fieldset>
+    <fieldset class="mb-4 p-4 border border-slate-200">
+      <legend class="p-2">Status</legend>
+      <p class="mb-4">Disabled short URLs can be previewed but will disable an error page if visited.</p>
+      <%=
+        form.collection_radio_buttons :enabled, [OpenStruct.new(id: true, name: "Enabled"), OpenStruct.new(id: false, name: "Disabled")], :id, :name do |b|
+          b.label(class: "block mb-4") { b.radio_button(class: "mr-2") + b.text }
+        end
+      %>
+    </fieldset>
+    <%= form.submit "Update short URL", class: "block p-2 bg-slate-50 border-2 border-slate-500 hover:bg-slate-200 hover:border-slate-900" %>
+  <% end %>
+</section>

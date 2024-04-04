@@ -1,4 +1,6 @@
 class Link < ApplicationRecord
+  self.primary_key = :shortcode
+
   has_many :views, primary_key: :shortcode, foreign_key: :shortcode
 
   validates :shortcode, presence: true

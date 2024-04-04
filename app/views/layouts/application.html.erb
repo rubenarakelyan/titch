@@ -1,19 +1,59 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <title>Titch</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= yield :title %> &middot; Titch</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="antialiased text-slate-600">
+    <nav class="bg-slate-50">
+      <div class="container mx-auto p-5 flex justify-between">
+        <h1 class="text-xl font-bold">
+          <a href="<%= root_path %>" class="no-underline">Titch</a>
+        </h1>
+        <div class="flex flex-wrap">
+          <% if logged_in? %>
+            <p>
+              <a href="<%= root_path %>" class="no-underline">Home</a>
+            </p>
+            <p class="ml-4 pl-4 border-l border-slate-200">
+              <a href="<%= links_path %>" class="no-underline">Short URLs</a>
+            </p>
+            <p class="ml-4 pl-4 border-l border-slate-200">
+              <a href="<%# views_path %>" class="no-underline">Views</a>
+            </p>
+            <p class="ml-4 pl-4 border-l border-slate-200">
+              <a href="<%= auth_logout_path %>" class="no-underline" data-turbo="false">Log out</a>
+            </p>
+          <% else %>
+            <%= button_to "Log in", "/auth/auth0", method: :post, data: { turbo: false } %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+    <main class="container mx-auto mt-28 px-5">
+      <% if flash.notice.present? %>
+      <div class="border-4 border-green-500 mb-4 p-4" role="status">
+        <%= flash.notice %>
+      </div>
+      <% end %>
       <%= yield %>
     </main>
+    <footer class="container mx-auto mt-28 p-5 flex border-t border-slate-200 text-sm">
+      <p>
+        Copyright © 2024 <a href="https://www.wackomenace.co.uk/" target="_blank" rel="noopener noreferer">Ruben Arakelyan</a>
+      </p>
+      <p class="ml-4 pl-4 border-l border-slate-200">
+        Licensed under the <a href="https://opensource.org/license/mit" target="_blank" rel="noopener noreferer">MIT licence</a>
+      </p>
+      <p class="ml-4 pl-4 border-l border-slate-200">
+        <a href="https://github.com/rubenarakelyan/titch" target="_blank" rel="noopener noreferer">GitHub</a>
+      </p>
+    </footer>
   </body>
 </html>
