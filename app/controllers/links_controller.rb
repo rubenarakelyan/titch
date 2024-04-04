@@ -13,6 +13,10 @@ class LinksController < ApplicationController
     @link = Link.new
   end
 
+  def edit
+    @link = Link.find(params[:shortcode])
+  end
+
   def create
     @link = Link.new(link_params.merge(created_by: session[:userinfo]["name"]))
 
@@ -21,10 +25,6 @@ class LinksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
-    @link = Link.find(params[:shortcode])
   end
 
   def update

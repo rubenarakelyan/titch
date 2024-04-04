@@ -1,0 +1,28 @@
+<% content_for :title, "Views" %>
+
+<section class="w-1/2">
+  <header>
+    <h2 class="mb-2 text-2xl font-bold">All views</h2>
+  </header>
+  <% if @views.present? %>
+    <table class="mb-2 table-auto">
+      <thead>
+        <tr>
+          <th class="p-2">Short URL</th>
+          <th class="p-2">Date and time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @views.each do |view| %>
+        <tr>
+          <td class="p-2"><a href="<%= full_short_url(view.link) %>" target="_blank" rel="noopener noreferer"><%= full_short_url(view.link) %></a></td>
+          <td class="p-2"><%= view.created_at %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+  <% else %>
+    <p class="mb-2">There are currently no views.</p>
+  <% end %>
+</section>

@@ -1,0 +1,10 @@
+<% content_for :title, "Preview for #{full_short_url(@link)}" %>
+
+<section class="w-1/2">
+  <header>
+    <h2 class="mb-2 text-2xl font-bold">Preview for <%= full_short_url(@link) %></h2>
+  </header>
+  <p class="mb-2">
+    The short URL <strong><%= full_short_url(@link) %></strong> redirects to <strong><a href="<%= @link.url %>" target="_blank" rel="noopener noreferer"><%= @link.url %></a></strong>.
+  </p>
+</section>

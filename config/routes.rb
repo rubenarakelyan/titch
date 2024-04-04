@@ -12,4 +12,10 @@ Rails.application.routes.draw do
   get "/auth/logout" => "auth0#logout"
 
   resources :links, param: :shortcode, except: %i[destroy]
+  resources :views, only: %i[index]
+
+  constraints shortcode: /[A-Za-z0-9]{4}/ do
+    get "/:shortcode", to: "redirect#redirect"
+    get "/p/:shortcode", to: "redirect#show"
+  end
 end
