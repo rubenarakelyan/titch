@@ -56,6 +56,9 @@ gem "sidekiq", "~> 7.2"
 # Use HTTParty to make external requests from Sidekiq
 gem "httparty", "~> 0.21"
 
+# Use Nokogiri to parse pages for OpenGraph tags
+gem "nokogiri", "~> 1.16.4"
+
 # Auth0 gems
 gem "omniauth-auth0", "~> 3.0"
 gem "omniauth-rails_csrf_protection", "~> 1.0"

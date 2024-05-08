@@ -21,6 +21,7 @@ class LinksController < ApplicationController
     @link = Link.new(link_params.merge(created_by: session[:userinfo]["name"]))
 
     if @link.save
+      FetchOpenGraphAttributesJob.perform_later(@link.id)
       redirect_to link_path(@link), notice: "#{helpers.full_short_url(@link)} successfully created"
     else
       render :new, status: :unprocessable_entity
