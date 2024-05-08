@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   get "/auth/failure" => "auth0#failure"
   get "/auth/logout" => "auth0#logout"
 
-  resources :links, param: :shortcode, except: %i[destroy]
+  resources :links, param: :shortcode, except: %i[destroy] do
+    member do
+      get :opengraph_image, to: "links#opengraph_image"
+    end
+  end
   resources :views, only: %i[index]
 
   constraints shortcode: /[A-Za-z0-9]{4}/ do

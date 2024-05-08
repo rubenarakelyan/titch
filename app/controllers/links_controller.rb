@@ -38,6 +38,16 @@ class LinksController < ApplicationController
     end
   end
 
+  def opengraph_image
+    @link = Link.find(params[:shortcode])
+
+    return if @link.og_image_url.blank?
+
+    image = HTTParty.get(@link.og_image_url)
+
+    render body: image.body, content_type: image.headers["Content-Type"]
+  end
+
   private
 
   def link_params

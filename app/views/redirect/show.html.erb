@@ -7,4 +7,17 @@
   <p class="mb-2">
     The short URL <strong><%= full_short_url(@link) %></strong> redirects to <strong><a href="<%= @link.url %>" target="_blank" rel="noopener noreferer"><%= @link.url %></a></strong>.
   </p>
+  <% if @link.open_graph_attributes_present? %>
+    <p class="mt-4 mb-2">
+      <img src="<%= opengraph_image_link_path(@link) %>" alt="<%= @link.title %>">
+    </p>
+    <p class="mb-2">
+      <strong>Title:</strong> <%= @link.title %>
+    </p>
+    <% if @link&.description&.present? %>
+      <p class="mb-2">
+        <strong>Description:</strong> <%= @link.description %>
+      </p>
+    <% end %>
+  <% end %>
 </section>

@@ -8,6 +8,10 @@ class Link < ApplicationRecord
 
   before_validation :set_shortcode
 
+  def open_graph_attributes_present?
+    title.present? && og_image_url.present?
+  end
+
   private
 
   def set_shortcode
