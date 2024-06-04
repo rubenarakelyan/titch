@@ -57,7 +57,7 @@ gem "sidekiq", "~> 7.2"
 gem "httparty", "~> 0.21"
 
 # Use Nokogiri to parse pages for OpenGraph tags
-gem "nokogiri", "~> 1.16.4"
+gem "nokogiri", "~> 1.16.5"
 
 # Auth0 gems
 gem "omniauth-auth0", "~> 3.0"
